@@ -1,16 +1,32 @@
 require 'rails_helper'
 
 RSpec.describe User, :type => :model do
+  subject { described_class.new(
+    username: 'Anything',
+    description: "Lorem  ipsum",
+    email: "user@email.com",
+    name: "John Lennon")
+  }
+
   it "is valid with valid attributes" do
-    expect(User.new).to be_valid
+    expect(subject).to be_valid
   end
 
   it "is not valid without a username" do
-    user = User.new(username: nil)
-    expect(user).to_not be_valid
+    subject.username = nil
+    expect(subject).to_not be_valid
   end
 
-  it "is not valid without a description"
-  it "is not valid without a email"
-  it "is not valid without a name"
+  it "is not valid without a description" do
+    subject.description = nil
+    expect(subject).to_not be_valid
+  end
+  it "is not valid without a email" do
+    subject.email = nil
+    expect(subject).to_not be_valid
+  end
+  it "is not valid without a name" do
+    subject.name = nil
+    expect(subject).to_not be_valid
+  end
 end
