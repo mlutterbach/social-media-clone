@@ -1,13 +1,6 @@
 class UsersController < ApplicationController
-  def about
-  end
+  #skip_before_action :authenticate_user!, only: :home
 
-  def contact
-  end
-
-  def home
-    @users = User.all
-  end
   def index
     @users = User.all
   end

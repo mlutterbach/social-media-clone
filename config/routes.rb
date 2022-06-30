@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
-  root to: 'users#home'
-  get 'about', to: 'users#about'
-  get 'contact', to: 'users#contact'
-  resources :users
+  devise_for :users
+  root to: 'tweets#home'
+  get 'about', to: 'tweets#about'
+  get 'contact', to: 'tweets#contact'
+  resources :users, only: [:create, :index, :destroy]
 end
