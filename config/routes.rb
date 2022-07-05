@@ -3,5 +3,7 @@ Rails.application.routes.draw do
   root to: 'tweets#home'
   get 'about', to: 'tweets#about'
   get 'contact', to: 'tweets#contact'
-  resources :users, only: [:create, :index, :destroy]
+  resources :users, only: [:create, :index, :destroy] do
+    resources :tweets
+  end
 end
