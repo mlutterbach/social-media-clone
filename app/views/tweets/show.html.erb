@@ -3,3 +3,6 @@
 <p><%= @tweet.location %></p>
 <p><%= @tweet.user.name %></p>
 <p><%= @tweet.retweet_count %></p>
+<%= link_to 'Delete', tweets_path, method: :delete,  data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
+<%= link_to "New Tweet", new_tweet_path %>
+<%= link_to "Update Tweet", edit_tweet_path(@tweet) %>
