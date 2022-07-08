@@ -1,6 +1,6 @@
 class TweetsController < ApplicationController
   skip_before_action :authenticate_user!, only: :home
-  before_action :set_user
+  before_action :set_user, only: [:show, :new, :edit, :update, :destroy]
   before_action :set_tweet, only: [:show, :edit, :update, :destroy]
 
   def about
@@ -28,7 +28,7 @@ class TweetsController < ApplicationController
     @tweet = Tweet.new(tweet_params)
     @tweet.user = current_user
     if @tweet.save
-      redirect_to user_tweets_path(@tweet)
+      redirect_to user_tweets_path(current_user)
     else
       render :new
     end
@@ -43,10 +43,8 @@ class TweetsController < ApplicationController
   end
 
   def destroy
-    # @user = User.find(params[:user_id])
-    # @tweet.user = @user
     @tweet.destroy
-    redirect_to tweets_path, status: :see_other
+    redirect_to user_tweets_path(current_user), status: :see_other
   end
 
   private
