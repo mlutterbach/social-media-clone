@@ -1,5 +1,18 @@
 <h1>This is the home</h1>
 
+<%# navbar %>
+<ul>
+  <li>Home</li>
+  <li>Explore</li>
+  <li>Notifications</li>
+  <li>Messages</li>
+  <li>Bookmarks</li>
+  <li>Lists</li>
+  <li>Profile</li>
+  <li>More</li>
+  <li><%= link_to "Tweet" , new_user_tweet_path(current_user), class: "new-tweet-button" %></li>
+</ul>
+
 <ul>
   <% @tweets.each do |tweet| %>
     <li><%= tweet.content %></li>

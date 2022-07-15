@@ -1,0 +1,29 @@
+.new-tweet-button {
+  text-decoration: none;
+  /* border-radius: 50%; */
+  color: white;
+  background-color: #1c93e2;
+  padding: 10px 20px;
+  text-align: center;
+  display: inline-block;
+  margin: 4px 2px;
+  border-radius: 16px;
+}
+
+.new-tweet-button:hover {
+  text-decoration: none;
+  /* border-radius: 50%; */
+  color: white;
+  background-color: #1772af;
+  padding: 10px 20px;
+  text-align: center;
+  display: inline-block;
+  margin: 4px 2px;
+  border-radius: 16px;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0px;
+  padding: 0 !important;
+}
