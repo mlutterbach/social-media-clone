@@ -1,16 +1,25 @@
 <h1>This is the home</h1>
 
 <%# navbar %>
-<ul>
-  <li>Home</li>
-  <li>Explore</li>
-  <li>Notifications</li>
-  <li>Messages</li>
-  <li>Bookmarks</li>
-  <li>Lists</li>
-  <li>Profile</li>
-  <li>More</li>
-  <li><%= link_to "Tweet" , new_user_tweet_path(current_user), class: "new-tweet-button" %></li>
+<ul class='navbar-list-button-ul' >
+  <li><%= link_to root_path, class: "navbar-list-button" do%>
+    <i class="fa-solid fa-house-user"></i>
+    Home
+  <% end %>
+  </li>
+  <li class="navbar-list-button"><i class="fa-solid fa-hashtag"></i> Explore</li>
+  <li class="navbar-list-button"><i class="fa-solid fa-bell"></i> Notifications</li>
+  <li class="navbar-list-button"><i class="fa-solid fa-envelope"></i> Messages</li>
+  <li class="navbar-list-button"><i class="fa-solid fa-bookmark"></i> Bookmarks</li>
+  <li class="navbar-list-button"><i class="fa-solid fa-memo"></i> Lists</li>
+  <li><%= link_to user_path(current_user), class: "navbar-list-button" do %>
+    <i class="fa-solid fa-user"></i>
+    Profile
+  <% end %>
+  </li>
+  <li class="navbar-list-button"><i class="fa-solid fa-circle-ellipsis"></i> More</li>
+  <li><%= link_to "Tweet", new_user_tweet_path(current_user), class: "new-tweet-button" %></li>
+  <li></li>
 </ul>
 
 <ul>

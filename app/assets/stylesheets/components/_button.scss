@@ -10,6 +10,47 @@
   border-radius: 16px;
 }
 
+.navbar-list-button-ul {
+  display: flex;
+  justify-content: space-evenly;
+  align-items:flex-start;
+  text-decoration: none;
+  flex-direction: column;
+}
+.navbar-list-button {
+  text-decoration: none;
+  color: white;
+  background-color: gray;
+  padding: 5px 10px;
+  text-align: center;
+  display: inline-block;
+  margin: 2px 1px;
+  // display: inline-block;
+  border-radius: 16px;
+  a {
+    color: #ffffff;
+    text-decoration: none;
+    padding: 5px;
+  }
+}
+
+.navbar-list-button:hover {
+  text-decoration: none;
+  color: white;
+  background-color: rgb(184, 182, 182);
+  padding: 5px 10px;
+  text-align: center;
+  display: inline-block;
+  margin: 2px 1px;
+  // display: inline-block;
+  border-radius: 16px;
+  a {
+    color: #ffffff;
+    text-decoration: none;
+    padding: 5px;
+  }
+}
+
 .new-tweet-button:hover {
   text-decoration: none;
   /* border-radius: 50%; */
