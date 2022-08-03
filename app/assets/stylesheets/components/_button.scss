@@ -17,6 +17,7 @@
   text-decoration: none;
   flex-direction: column;
 }
+
 .navbar-list-button {
   text-decoration: none;
   color: white;
@@ -46,6 +47,21 @@
   border-radius: 16px;
   a {
     color: #ffffff;
+    text-decoration: none;
+    padding: 5px;
+  }
+}
+
+.navbar-list-user-profile {
+  display: flex;
+  font-size: 11px;
+}
+
+.navbar-list-user-profile:hover {
+  display: flex;
+  font-size: 11px;
+  a {
+    color: #010000;
     text-decoration: none;
     padding: 5px;
   }

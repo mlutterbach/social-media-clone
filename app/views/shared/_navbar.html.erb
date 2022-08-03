@@ -11,7 +11,6 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto">
         <% if user_signed_in? %>
-        <% break %>
           <li class="nav-item active">
             <%= link_to "Home", "#", class: "nav-link" %>
           </li>
@@ -35,3 +34,53 @@
     </div>
   </div>
 </div>
+
+<%# navbar %>
+<ul class='navbar-list-button-ul navbar-left' >
+  <li><%= link_to root_path, class: "navbar-list-button" do%>
+    <i class="fa-solid fa-house-user"></i>
+    Home
+  <% end %>
+  </li>
+  <li class="navbar-list-button"><i class="fa-solid fa-hashtag"></i> Explore</li>
+  <li class="navbar-list-button"><i class="fa-solid fa-bell"></i> Notifications</li>
+  <li class="navbar-list-button"><i class="fa-solid fa-envelope"></i> Messages</li>
+  <li class="navbar-list-button"><i class="fa-solid fa-bookmark"></i> Bookmarks</li>
+  <li class="navbar-list-button"><i class="fa-solid fa-list"></i> Lists</li>
+  <% if user_signed_in? %>
+    <li><%= link_to user_path(current_user), class: "navbar-list-button" do %>
+      <i class="fa-solid fa-user"></i>
+      Profile
+    <% end %>
+  <% else %>
+    <!--li class="nav-item"-->
+      <%= link_to new_user_session_path, class: "navbar-list-button" do %>
+        <i class="fa-solid fa-user"></i>
+        Profile
+      <% end %>
+    <!--/li-->
+  <% end %>
+  </li>
+  <li class="navbar-list-button"><i class="fa-solid fa-ellipsis"></i> More</li>
+  <% if user_signed_in? %>
+    <li><%= link_to "Tweet", new_user_tweet_path(current_user), class: "new-tweet-button" %></li>
+  <% else %>
+    <!--li class="nav-item"-->
+      <%= link_to "Tweet", new_user_session_path, class: "new-tweet-button" %>
+    <!--/li-->
+  <% end %>
+    <li class="nav-item dropdown navbar-list-button navbar-list-user-profile">
+      <div>
+        <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+          <%= link_to "Action", "#", class: "dropdown-item" %>
+          <%= link_to "Another action", "#", class: "dropdown-item" %>
+          <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+        </div>
+      </div>
+      <div>
+        <%= current_user.name %>
+        <%= current_user.username %>
+      </div>
+    </li>
+</ul>
