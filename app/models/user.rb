@@ -6,8 +6,8 @@ class User < ApplicationRecord
 
   has_many :tweets, dependent: :destroy
 
-  validates :username, presence: true
-  validates :name, presence: true
-  validates :email, presence: true
-  validates :description, length: { minimum: 6 }
+  # validates :username, presence: true
+  # validates :name, presence: true
+  # validates :email, presence: true
+  # validates :description, length: { minimum: 6 }
 end
