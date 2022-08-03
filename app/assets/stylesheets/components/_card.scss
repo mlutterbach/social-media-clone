@@ -1,0 +1,22 @@
+.tweet-message {
+  border: 2px solid black;
+  display: flex;
+  flex-direction: column;
+}
+
+.tweet-identifiers {
+  display: inline-flex;
+  //justify-content: space-around;
+  flex-wrap: wrap;
+  // padding: 2px;
+  // margin-inline: 5px;
+}
+
+.tweet-identifiers > div {
+  margin: 6px;
+}
+
+.tweet-counters {
+  display: flex;
+  justify-content: space-around;
+}
