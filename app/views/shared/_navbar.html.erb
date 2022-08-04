@@ -42,8 +42,13 @@
         </div>
       </div>
       <div>
+      <% if user_signed_in? %>
         <%= current_user.name %>
         <%= current_user.username %>
+      <% else %>
+    <!--li class="nav-item"-->
+        <%= link_to "Login", new_user_session_path, class: "navbar-list-button" %>
+      <% end %>
       </div>
     </li>
 </ul>
