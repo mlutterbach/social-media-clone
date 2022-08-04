@@ -1,22 +1,45 @@
 .tweet-message {
   border: 2px solid black;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  padding-left: 16px;
+  padding-right: 16px;
 }
 
 .tweet-identifiers {
   display: inline-flex;
   //justify-content: space-around;
   flex-wrap: wrap;
+  gap: 10px;
   // padding: 2px;
   // margin-inline: 5px;
+  align-items: stretch;
+}
+.tweet-identifiers-items {
+  flex-basis: auto;
+  //padding: .5em;
 }
 
-.tweet-identifiers > div {
-  margin: 6px;
+.tweet-identifiers-image {
+  flex-basis: content;
+  align-items: center;
+  margin-right: 12px;
+  margin-top: 10px;
+  flex-basis: 48px;
+  .avatar {
+    width: 50px;
+  }
 }
+
+.tweet-identifiers-items-content {
+  flex-basis: 100%;
+}
+
+// .tweet-identifiers > div {
+//   margin: 6px;
+// }
 
 .tweet-counters {
   display: flex;
-  justify-content: space-around;
+  gap:1em;
 }
