@@ -1,7 +1,5 @@
 <%= simple_form_for [@user, @tweet] do |f|  %>
   <%= f.input :content %>
-  <%= f.input :retweet_count %>
-  <%= f.input :likes_count %>
   <%= f.input :reply_privacy, as: :boolean, boolean_style: :inline %>
   <%= f.input :location %>
   <%= f.submit "Submit", class: "btn btn-primary" %>

@@ -6,18 +6,20 @@
       <div>
         <ul>
           <% @tweets.each do |tweet| %>
-            <div class="tweet-message">
-              <div class="tweet-identifiers-image"><%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar" %></div>
-              <div class="tweet-identifiers">
-                  <div class="tweet-identifiers-items"><li><%= tweet.user.name %></li></div>
-                  <div class="tweet-identifiers-items"><li>@<%= tweet.user.username %></li></div>
-                  <div class="tweet-identifiers-items tweet-identifiers-items-content"><li><%= tweet.content %></li></div>
-                <div class='tweet-counters'>
-                  <li><i class="fa-solid fa-retweet"></i><%= tweet.retweet_count%></li>
-                  <li><i class="fa-solid fa-heart"></i><%= tweet.likes_count %></li>
+            <%= link_to user_tweet_path(current_user, tweet) do%>
+              <div class="tweet-message">
+                <div class="tweet-identifiers-image"><%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar" %></div>
+                <div class="tweet-identifiers">
+                    <div class="tweet-identifiers-items"><li><%= tweet.user.name %></li></div>
+                    <div class="tweet-identifiers-items"><li>@<%= tweet.user.username %></li></div>
+                    <div class="tweet-identifiers-items tweet-identifiers-items-content"><li><%= tweet.content %></li></div>
+                  <div class='tweet-counters'>
+                    <li><i class="fa-solid fa-retweet"></i><%= tweet.retweet_count%></li>
+                    <li><i class="fa-solid fa-heart"></i><%= tweet.likes_count %></li>
+                  </div>
                 </div>
               </div>
-            </div>
+            <% end %>
           <% end %>
         </ul>
       </div>

@@ -27,6 +27,8 @@ class TweetsController < ApplicationController
   def create
     @tweet = Tweet.new(tweet_params)
     @tweet.user = current_user
+    @tweet.retweet_count = 0
+    @tweet.likes_count = 0
     if @tweet.save
       redirect_to user_tweets_path(current_user)
     else
@@ -50,7 +52,7 @@ class TweetsController < ApplicationController
   private
 
   def tweet_params
-    params.require(:tweet).permit(:content, :retweet_count, :likes_count, :reply_privacy, :location)
+    params.require(:tweet).permit(:content, :reply_privacy, :location)
   end
 
   def set_tweet

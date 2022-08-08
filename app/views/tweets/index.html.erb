@@ -6,7 +6,10 @@
 
       <ul>
         <% @tweets.each do |tweet| %>
-          <li><%= tweet.content %></li>
+          <li><%= link_to user_tweet_path(current_user, tweet) do %><%= tweet.content %> <% end %></li>
+          <li><%= tweet.user.username %></li>
+          <li><%= tweet.user.name %></li>
+          <li><%= tweet.location %></li>
         <% end %>
       </ul>
       </ul>
