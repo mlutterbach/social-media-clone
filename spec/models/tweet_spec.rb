@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe Tweet, type: :model do
   let (:name_user) do
     User.create!(username: 'Anything',
+      password: 'secret',
       description: "Lorem ipsum",
       email: "user@email.com",
       name: "John Lennon")
@@ -44,16 +45,4 @@ RSpec.describe Tweet, type: :model do
     expect(tweet.likes_count).to be >= 0
     expect(tweet.retweet_count).to be >= 0
   end
-
-    # create_table "tweets", force: :cascade do |t|
-    #   t.datetime "date"
-    #   t.string "content"
-    #   t.integer "retweet_count"
-    #   t.integer "likes_count"
-    #   t.integer "user_id", null: false
-    #   t.boolean "reply_privacy"
-    #   t.string "location"
-    #   t.datetime "created_at", precision: 6, null: false
-    #   t.datetime "updated_at", precision: 6, null: false
-    #   t.index ["user_id"], name: "index_tweets_on_user_id"
 end

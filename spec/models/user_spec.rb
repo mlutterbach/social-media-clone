@@ -9,6 +9,7 @@ RSpec.describe User, type: :model do
   }
 
   it "is valid with valid attributes" do
+    subject.password = 'secret'
     expect(subject).to be_valid
   end
 
