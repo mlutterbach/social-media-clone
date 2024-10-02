@@ -1,28 +1,51 @@
 <div class="container">
   <div class="row justify-content-center">
-    <div class="col-12 col-lg-6">
-      <!-- This div is centered and takes 6 columns -->
+    <div class="col-12 col-lg-8">
       <h1>Home</h1>
-      <div>
-        <ul>
-          <% @tweets.each do |tweet| %>
-            <%= link_to user_tweet_path(current_user, tweet) do%>
-              <div class="tweet-message">
-                <div class="tweet-identifiers-image"><%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar" %></div>
-                <div class="tweet-identifiers">
-                    <div class="tweet-identifiers-items"><li><%= tweet.user.name %></li></div>
-                    <div class="tweet-identifiers-items"><li>@<%= tweet.user.username %></li></div>
-                    <div class="tweet-identifiers-items tweet-identifiers-items-content"><li><%= tweet.content %></li></div>
-                  <div class='tweet-counters'>
-                    <li><i class="fa-solid fa-retweet"></i><%= tweet.retweet_count%></li>
-                    <li><i class="fa-solid fa-heart"></i><%= tweet.likes_count %></li>
-                  </div>
-                </div>
+
+      <% if user_signed_in? %>
+        <div class="new-tweet-form mb-4">
+          <%= form_with(model: [current_user, Tweet.new], local: true) do |f| %>
+            <div class="form-group">
+              <%= f.label :content, "What's happening?" %>
+              <%= f.text_area :content, rows: 3, class: "form-control", placeholder: "Type your tweet here..." %>
+            </div>
+            <div class="actions">
+              <%= f.submit "Tweet", class: "btn btn-primary" %>
+            </div>
+          <% end %>
+        </div>
+      <% else %>
+        <p>Please <%= link_to "sign in", new_user_session_path %> to tweet.</p>
+      <% end %>
+
+      <h2>Tweets</h2>
+      <ul class="list-unstyled">
+        <ul class="list-unstyled">
+          <% @tweets.order(created_at: :desc).each do |tweet| %>
+            <li class="tweet mb-3">
+              <div class="tweet-header">
+                <strong><%= tweet.user.name %></strong> @<%= tweet.user.username %>
+                <span class="text-muted small"><%= time_ago_in_words(tweet.created_at) %> ago</span>
               </div>
-            <% end %>
+              <div class="tweet-content">
+                <p><%= tweet.content %></p>
+              </div>
+              <div class="tweet-footer">
+                <span><i class="fa-solid fa-heart"></i> <%= tweet.likes_count %></span>
+
+                <% if current_user && current_user.liked_tweets.include?(tweet) %>
+                  <%= button_to "Unlike", tweet_likes_path(tweet), method: :delete, class: "btn btn-secondary btn-sm" %>
+                <% else %>
+                  <%= button_to "Like", tweet_likes_path(tweet), method: :post, class: "btn btn-primary btn-sm" %>
+                <% end %>
+
+                <span class="ml-2"><i class="fa-solid fa-retweet"></i> <%= tweet.retweet_count %></span>
+              </div>
+            </li>
           <% end %>
         </ul>
-      </div>
+      </ul>
     </div>
   </div>
 </div>

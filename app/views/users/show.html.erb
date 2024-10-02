@@ -1,11 +1,41 @@
-<div class="container">
-  <div class="row justify-content-center">
-    <div class="col-12 col-lg-6">
-      <h1>User show</h1>
-      <%= @user.name %>
-      <%= @user.description %>
-      <%= @user.username %>
-      <%= @user.email%>
+<div class="profile-container">
+  <div class="profile-header">
+    <div class="profile-banner">
+      <img src="app/assets/images/banner.jpg" alt="Banner Image" class="banner-image">
     </div>
+    <div class="profile-info">
+      <div class="profile-avatar">
+        <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar" %> <!-- User avatar -->
+      </div>
+      <div class="profile-details">
+        <h1 class="profile-name"><%= current_user.name %></h1>
+        <p class="profile-username">@<%= current_user.username %></p>
+        <p class="profile-bio"><%= current_user.description || "This user hasn't added a bio." %></p>
+        <p class="profile-stats">
+          <span><%= current_user.tweets.count %> Tweets</span>
+          <span><%= current_user.followers_count || 0 %> Followers</span>
+          <span><%= current_user.following_count || 0 %> Following</span>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="profile-tweets">
+    <h2>Tweets</h2>
+    <ul class="tweets-list">
+      <% @tweets.each do |tweet| %>
+        <li class="tweet">
+          <div class="tweet-header">
+            <strong><%= tweet.user.name %></strong> <span class="text-muted">@<%= tweet.user.username %></span>
+            <span class="text-muted small"><%= time_ago_in_words(tweet.created_at) %> ago</span>
+          </div>
+          <p class="tweet-content"><%= tweet.content %></p>
+          <div class="tweet-stats">
+            <span><i class="fa-solid fa-heart"></i> <%= tweet.likes_count %></span>
+            <span class="ml-2"><i class="fa-solid fa-retweet"></i> <%= tweet.retweet_count %></span>
+          </div>
+        </li>
+      <% end %>
+    </ul>
   </div>
 </div>

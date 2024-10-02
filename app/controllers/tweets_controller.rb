@@ -25,14 +25,15 @@ class TweetsController < ApplicationController
   end
 
   def create
-    @tweet = Tweet.new(tweet_params)
-    @tweet.user = current_user
+    @user = User.find(params[:user_id])
+    @tweet = @user.tweets.build(tweet_params)
+
     @tweet.retweet_count = 0
     @tweet.likes_count = 0
     if @tweet.save
-      redirect_to user_tweets_path(current_user)
+      redirect_to root_path, notice: "Tweet created successfully."
     else
-      render :new
+      redirect_to root_path, alert: @tweet.errors.full_messages.to_sentence
     end
   end
 

@@ -1,8 +1,19 @@
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-12 col-lg-6">
-      <h1>new tweet</h1>
-      <%= render "form" %>
+      <h2>New Tweet</h2>
+
+      <%= form_for [current_user, @tweet] do |f| %>
+        <div class="form-group">
+          <%= f.label :content, "What's happening?" %>
+          <%= f.text_area :content, rows: 5, class: "form-control", placeholder: "Write your tweet here..." %>
+        </div>
+
+        <div class="actions">
+          <%= f.submit "Tweet", class: "btn btn-primary" %>
+          <%= link_to "Cancel", root_path, class: "btn btn-secondary" %>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>
