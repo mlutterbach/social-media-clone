@@ -1,0 +1,44 @@
+/* app/assets/stylesheets/custom.css */
+
+body {
+  background-color: #F5F8FA; /* Light background */
+  font-family: Arial, sans-serif;
+}
+
+.navbar-container {
+  background-color: #1DA1F2; /* Twitter blue */
+  padding: 15px;
+  color: white;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #14171A; /* Dark text */
+}
+
+.btn-primary {
+  background-color: #1DA1F2; /* Button color */
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #0d95e8; /* Darker shade on hover */
+}
+
+.form-control {
+  border: 1px solid #1DA1F2;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.alert {
+  background-color: #fff; /* Alert background */
+  border: 1px solid #1DA1F2;
+}
+
+.footer-container {
+  text-align: center;
+  padding: 20px;
+  background-color: #F5F8FA;
+}

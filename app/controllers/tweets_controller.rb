@@ -1,20 +1,11 @@
 class TweetsController < ApplicationController
-  skip_before_action :authenticate_user!, only: :home
+  skip_before_action :authenticate_user!
   before_action :set_user, only: [:show, :new, :edit, :update, :destroy]
   before_action :set_tweet, only: [:show, :edit, :update, :destroy]
 
-  def about
-  end
-
-  def contact
-  end
-
-  def home
-    @tweets = Tweet.all
-  end
-
   def index
     @tweets = Tweet.all
+    @tweets.all.order(created_at: :desc)
   end
 
   def show

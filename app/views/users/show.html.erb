@@ -1,11 +1,11 @@
 <div class="profile-container">
   <div class="profile-header">
     <div class="profile-banner">
-      <img src="app/assets/images/banner.jpg" alt="Banner Image" class="banner-image">
+      <%= image_tag "banner.jpg", alt: "Banner Image", class: "banner-image" %>
     </div>
     <div class="profile-info">
       <div class="profile-avatar">
-        <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar" %> <!-- User avatar -->
+        <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar profile-avatar" %>
       </div>
       <div class="profile-details">
         <h1 class="profile-name"><%= current_user.name %></h1>
