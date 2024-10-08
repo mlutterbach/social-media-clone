@@ -14,18 +14,27 @@
   </head>
 
   <body>
-    <div class="page-container">
+    <div class="page-container d-flex">
       <% unless controller_name == 'sessions' && action_name.in?(%w[new create destroy]) %>
-        <div class="navbar-container"><%= render "shared/navbar" %></div>
+        <div class="navbar-container">
+          <%= render "shared/navbar" %>
+        </div>
       <% end %>
 
-      <div class="content-container">
+      <div class="content-container flex-grow-1">
         <%= yield %>
+      <% if notice %>
         <div class="notice"><%= notice %></div>
+      <% end %>
+
+      <% if alert %>
         <div class="alert"><%= alert %></div>
+      <% end %>
       </div>
 
-      <div class="footer-container"><%#= render "shared/footer" %></div>
+      <div class="footer-container">
+        <%= render "shared/footer" %>
+      </div>
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
     </div>
   </body>

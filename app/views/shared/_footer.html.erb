@@ -1,0 +1,30 @@
+<div class="footer__container bd-grid">
+  <div class="footer__data">
+      <h2 class="footer__title">Marcos Lutterbach</h2>
+      <p class="footer__text">Welcome to my TheTwitter project</p>
+  </div>
+
+  <div class="footer__data">
+      <h2 class="footer__title">EXPLORE</h2>
+      <ul>
+          <li><%= link_to root_path, class: "footer__link" do%>
+            <i class="fa-solid fa-house-user"></i>
+            Home
+          <% end %>
+          <li><%= link_to user_path(current_user), class: "footer__link" do %>
+            <i class="fa-solid fa-user"></i>
+            Profile
+          <% end %>
+      </ul>
+  </div>
+
+  <div class="footer__data">
+    <h2 class="footer__title">FOLLOW</h2>
+      <a href="https://github.com/mlutterbach" target="_blank" rel="noopener noreferrer" class="footer__social">
+        <i class="fa-brands fa-github"></i>
+      </a>
+      <a href="https://www.linkedin.com/in/marcoslutterbach" target="_blank" rel="noopener noreferrer" class="footer__social">
+        <i class="fa-brands fa-linkedin"></i>
+      </a>
+  </div>
+</div>

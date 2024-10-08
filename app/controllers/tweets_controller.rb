@@ -4,8 +4,7 @@ class TweetsController < ApplicationController
   before_action :set_tweet, only: [:show, :edit, :update, :destroy]
 
   def index
-    @tweets = Tweet.all
-    @tweets.all.order(created_at: :desc)
+    @tweets = Tweet.order(created_at: :desc)
   end
 
   def show
@@ -32,8 +31,11 @@ class TweetsController < ApplicationController
   end
 
   def update
-    @tweet.update(tweet_params)
-    redirect_to user_tweets_path(@tweet)
+    if @tweet.update(tweet_params)
+      redirect_to tweet_path(@tweet), notice: "Tweet updated successfully."
+    else
+      render :edit
+    end
   end
 
   def destroy

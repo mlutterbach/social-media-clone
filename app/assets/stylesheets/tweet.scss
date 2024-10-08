@@ -1,0 +1,13 @@
+.tweet-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  background-color: white;
+  padding: 15px;
+  border-radius: 8px;
+  transition: background-color 0.2s;
+}
+
+.tweet-link:hover {
+  background-color: #f5f8fa;
+}

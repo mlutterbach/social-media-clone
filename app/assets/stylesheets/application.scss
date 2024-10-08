@@ -4,3 +4,33 @@
 @import "bootstrap/scss/bootstrap";
 
 @import "profile";
+@import "footer";
+@import "custom";
+@import "tweet";
+@import "tweet_show";
+
+.page-container {
+  display: flex;
+  height: 100vh; // Full height of the viewport
+}
+
+.navbar-container {
+  width: 20%; // Left navbar takes up 25%
+  background: white; // Background color for the navbar
+  border-right: 1px solid #ddd; // Optional border
+  padding: 20px 10px; // Ensure there’s space around items
+  position: relative; // Ensure it doesn't overlap the footer
+}
+
+.content-container {
+  width: 60%; // Center area takes up 50%
+  // padding: 20px; // Optional padding
+  overflow-y: auto; // Allow scrolling if content overflows
+}
+
+.footer-container {
+  width: 20%; // Right footer takes up 25%
+  background: #f8f9fa; // Optional footer background color
+  padding: 10px; // Optional padding
+  position: relative; // Keep it static
+}

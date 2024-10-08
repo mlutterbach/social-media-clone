@@ -1,14 +1,6 @@
-<div class="container">
-  <div class="row justify-content-center">
-    <div class="col-12 col-lg-6">
-      <h2><%= @tweet.content %></h2>
-      <p><%= @tweet.likes_count %></p>
-      <p><%= @tweet.location %></p>
-      <p><%= @tweet.user.name %></p>
-      <p><%= @tweet.retweet_count %></p>
-      <%= link_to 'Delete', tweet_path, method: :delete,  data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
-      <%= link_to "New Tweet", new_user_tweet_path %>
-      <%= link_to "Update Tweet", edit_user_tweet_path(@tweet) %>
-    </div>
-  </div>
+<div class="tweet-container">
+  <h1>Tweet by <%= @tweet.user.name %></h1>
+  <ul class="tweets-list">
+    <%= render @tweet %>
+  </ul>
 </div>
