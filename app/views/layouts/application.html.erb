@@ -2,7 +2,7 @@
 <html>
   <head>
     <title>SocialMediaClone</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -22,14 +22,17 @@
       <% end %>
 
       <div class="content-container flex-grow-1">
-        <%= yield %>
-      <% if notice %>
-        <div class="notice"><%= notice %></div>
-      <% end %>
+        <!-- Add alerts/notices here -->
+        <div class="alert-container">
+          <% if notice %>
+            <div class="alert alert-success" role="alert"><%= notice %></div>
+          <% end %>
+          <% if alert %>
+            <div class="alert alert-danger" role="alert"><%= alert %></div>
+          <% end %>
+        </div>
 
-      <% if alert %>
-        <div class="alert"><%= alert %></div>
-      <% end %>
+        <%= yield %>
       </div>
 
       <div class="footer-container">
