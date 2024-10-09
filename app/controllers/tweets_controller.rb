@@ -1,7 +1,8 @@
 class TweetsController < ApplicationController
   skip_before_action :authenticate_user!
-  before_action :set_user, only: [:show, :new, :edit, :update, :destroy]
+  before_action :set_user, only: [:show, :new, :edit, :update]
   before_action :set_tweet, only: [:show, :edit, :update, :destroy]
+  before_action :authorize_user!, only: [:destroy]
 
   def index
     @tweets = Tweet.order(created_at: :desc)
@@ -54,6 +55,12 @@ class TweetsController < ApplicationController
   end
 
   def set_user
-    @user = current_user
+    @user = User.find(params[:user_id])
+  end
+
+  def authorize_user!
+    unless @tweet.user == current_user
+      redirect_to root_path, alert: "You are not authorized to delete this tweet."
+    end
   end
 end

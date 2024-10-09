@@ -9,13 +9,13 @@
         <%= image_tag "https://avatars.githubusercontent.com/u/100782377?s=400&u=8846f6a4dcd5d5a2ddd379ba148683f2122b08e6&v=4", class: "avatar profile-avatar" %>
       </div>
       <div class="profile-details">
-        <h1 class="profile-name"><%= current_user.name %></h1>
-        <p class="profile-username">@<%= current_user.username %></p>
-        <p class="profile-bio"><%= current_user.description || "This user hasn't added a bio." %></p>
+        <h1 class="profile-name"><%= @user.name %></h1>
+        <p class="profile-username">@<%= @user.username %></p>
+        <p class="profile-bio"><%= @user.description || "This user hasn't added a bio." %></p>
         <p class="profile-stats">
-          <span><%= current_user.tweets.count %> Tweets</span>
-          <span><%= current_user.followers_count || 0 %> Followers</span>
-          <span><%= current_user.following_count || 0 %> Following</span>
+          <span><%= @user.tweets.count %> Tweets</span>
+          <span><%= @user.followers_count || 0 %> Followers</span>
+          <span><%= @user.following_count || 0 %> Following</span>
         </p>
       </div>
     </div>

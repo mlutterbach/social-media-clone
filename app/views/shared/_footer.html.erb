@@ -1,7 +1,7 @@
 <div class="footer__container bd-grid">
   <div class="footer__data">
       <h2 class="footer__title">Marcos Lutterbach</h2>
-      <p class="footer__text">Welcome to my TheTwitter project</p>
+      <p class="footer__text">Welcome to my rettiwT project</p>
   </div>
 
   <div class="footer__data">
@@ -11,9 +11,11 @@
             <i class="fa-solid fa-house-user"></i>
             Home
           <% end %>
-          <li><%= link_to user_path(current_user), class: "footer__link" do %>
-            <i class="fa-solid fa-user"></i>
-            Profile
+          <% if user_signed_in? %>
+            <li><%= link_to user_path(current_user), class: "footer__link" do %>
+              <i class="fa-solid fa-user"></i>
+              Profile
+            <% end %>
           <% end %>
       </ul>
   </div>

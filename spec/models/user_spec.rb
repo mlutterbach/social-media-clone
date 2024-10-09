@@ -44,3 +44,52 @@ RSpec.describe User, type: :model do
     expect(user.tweets.count).to eq(0)
   end
 end
+
+RSpec.describe User, type: :model do
+  let(:user1) { User.create!(name: "User 1", username: "User1", email: "user1@example.com", password: "password", description:"A description 1") }
+  let(:user2) { User.create!(name: "User 2", username: "User2", email: "user2@example.com", password: "password", description:"A description 2") }
+
+  describe "follow/unfollow functionality" do
+    context "when a user follows another user" do
+      it "increments the following count of the follower" do
+        user1.follow(user2)
+        expect(user1.following_count).to eq(1)
+      end
+
+      it "increments the followers count of the followed user" do
+        user1.follow(user2)
+        expect(user2.followers_count).to eq(1)
+      end
+
+      it "does not increment counts if already following" do
+        user1.follow(user2)
+        expect {
+          user1.follow(user2)
+        }.not_to change { user1.following_count }
+      end
+    end
+
+    context "when a user unfollows another user" do
+      before do
+        user1.follow(user2)
+      end
+
+      it "decrements the following count of the follower" do
+        user1.unfollow(user2)
+        expect(user1.following_count).to eq(0)
+      end
+
+      it "decrements the followers count of the followed user" do
+        user1.unfollow(user2)
+        expect(user2.followers_count).to eq(0)
+      end
+
+      it "does not decrement counts if not following" do
+        user1.unfollow(user2)
+        expect {
+          user1.unfollow(user2)
+        }.not_to change { user1.following_count }
+      end
+    end
+  end
+end

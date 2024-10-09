@@ -1,7 +1,7 @@
 <ul class='navbar-list-button-ul navbar-left'>
   <li class="navbar-logo">
     <%= image_tag "twitter_logo.png", alt: "Twitter Logo", class: "navbar-logo-image" %>
-    <span class="navbar-title">TheTwitter</span>
+    <span class="navbar-title">rettiwT</span>
   </li>
 
   <li>
@@ -38,7 +38,8 @@
   <% end %>
 
   <li class="nav-item dropdown navbar-list-button navbar-list-user-profile">
-    <div>
+  <div>
+    <% if user_signed_in? %>
       <%= image_tag "https://avatars.githubusercontent.com/u/100782377?s=400&u=8846f6a4dcd5d5a2ddd379ba148683f2122b08e6&v=4", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
       <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
         <%= link_to "Profile", user_path(current_user), class: "dropdown-item" %>
@@ -46,12 +47,11 @@
       </div>
     </div>
     <div>
-      <% if user_signed_in? %>
         <%= current_user.name %>
         <%= "@#{current_user.username}" %>
-      <% else %>
-        <%= link_to "Login", new_user_session_path, class: "navbar-list-button" %>
-      <% end %>
+    <% else %>
+      <%= link_to "Login", new_user_session_path, class: "navbar-list-button" %>
+    <% end %>
     </div>
   </li>
 </ul>

@@ -15,17 +15,25 @@
     <p><%= tweet.content %></p>
   </div>
   <div class="tweet-footer">
-    <span class="like-retweet">
-      <i class="fa-solid fa-heart"></i> <%= tweet.likes_count %>
-    </span>
-
     <% if current_user && current_user.liked_tweets.include?(tweet) %>
       <% like = current_user.likes.find_by(tweet: tweet) %>
-      <%= button_to "Unlike", tweet_like_path(tweet, like), method: :delete, class: "btn btn-secondary btn-sm" %>
+      <%= button_to tweet_like_path(tweet, like), method: :delete do %>
+          <i class="fa-solid fa-heart" style="color: #ed0707; padding:2px;"></i><%= tweet.likes_count %>
+      <% end %>
+
     <% else %>
-      <%= button_to "Like", tweet_likes_path(tweet), method: :post, class: "btn btn-primary btn-sm" %>
+      <%= button_to tweet_likes_path(tweet), method: :post do %>
+          <i class="fa-solid fa-heart"></i> <%= tweet.likes_count %>
+      <% end %>
     <% end %>
 
     <span class="ml-2"><i class="fa-solid fa-retweet"></i> <%= tweet.retweet_count %></span>
+
+    <% if current_user && current_user.tweets.include?(tweet) %>
+      <%= button_to tweet_path(tweet), method: :delete, data: { confirm: "Are you sure?" } do %>
+        <i class="fa-solid fa-trash-can"></i>
+      <% end %>
+    <% end %>
+
   </div>
 </li>
