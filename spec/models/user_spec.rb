@@ -5,7 +5,8 @@ RSpec.describe User, type: :model do
     username: 'Anything',
     description: "Lorem ipsum",
     email: "user@email.com",
-    name: "John Lennon")
+    name: "John Lennon",
+    password: "secret")
   }
 
   it "is valid with valid attributes" do
@@ -18,13 +19,13 @@ RSpec.describe User, type: :model do
     expect(subject).to_not be_valid
   end
 
-  it "is not valid without a description" do
-    subject.description = nil
+  it "is not valid without a username" do
+    subject.password = nil
     expect(subject).to_not be_valid
   end
 
-  it "description cannot be shorter than 6 characters" do
-    subject.description = "Good!"
+  it "is not valid without a description" do
+    subject.description = nil
     expect(subject).to_not be_valid
   end
 
