@@ -44,6 +44,33 @@ h1, h2, h3, h4, h5, h6 {
   background: white;
 }
 
+.button_to button:hover {
+  border: none;
+  background: white;
+  color:#7e8287;
+}
+
+.comment-icon a:link {
+  text-decoration:none;
+  color:#14171A;
+}
+
+.comment-icon a:link:hover {
+  text-decoration:none;
+  color:#7e8287;
+}
+
+
+.tweet-link {
+  display: block;
+  text-decoration: none;
+  padding: 0;
+}
+
+.tweet-link:hover {
+  background-color: #f5f8fa;
+}
+
 // .footer-container {
 //   text-align: center;
 //   padding: 20px;

@@ -1,20 +1,23 @@
 <li class="tweet mb-3">
-  <div class="tweet-header">
-    <div class="tweet-header-content">
-      <div class="avatar">
-        <%= image_tag "https://avatars.githubusercontent.com/u/100782377?s=400&u=8846f6a4dcd5d5a2ddd379ba148683f2122b08e6&v=4", class: "avatar" %>
+  <%= link_to tweet_path(tweet), class: "tweet-link" do %>
+    <div class="tweet-header">
+      <div class="tweet-header-content">
+        <div class="avatar">
+          <%= image_tag "https://avatars.githubusercontent.com/u/100782377?s=400&u=8846f6a4dcd5d5a2ddd379ba148683f2122b08e6&v=4", class: "avatar" %>
+        </div>
+        <div class="user-info">
+          <strong class="username"><%= tweet.user.name %></strong>
+          <span class="tweet-username">@<%= tweet.user.username %></span>
+        </div>
       </div>
-      <div class="user-info">
-        <strong class="username"><%= tweet.user.name %></strong>
-        <span class="tweet-username">@<%= tweet.user.username %></span>
-      </div>
+      <span class="tweet-time text-muted small"><%= time_ago_in_words(tweet.created_at) %> ago</span>
     </div>
-    <span class="tweet-time text-muted small"><%= time_ago_in_words(tweet.created_at) %> ago</span>
-  </div>
-  <div class="tweet-content">
-    <p><%= tweet.content %></p>
-  </div>
-  <div class="tweet-footer">
+    <div class="tweet-content">
+      <p><%= tweet.content || "No content available" %></p>
+    </div>
+  <% end %>
+
+    <div class="tweet-footer">
     <% if current_user && current_user.liked_tweets.include?(tweet) %>
       <% like = current_user.likes.find_by(tweet: tweet) %>
       <%= button_to tweet_like_path(tweet, like), method: :delete do %>
@@ -35,5 +38,11 @@
       <% end %>
     <% end %>
 
+    <!-- Comment Icon -->
+    <span class="comment-icon">
+      <%= link_to tweet_path(tweet) do %>
+        <i class="fa-solid fa-comment" style="padding:2px;"></i><%= tweet.comments.count %>
+      <% end %>
+    </span>
   </div>
 </li>

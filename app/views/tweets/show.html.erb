@@ -3,4 +3,35 @@
   <ul class="tweets-list">
     <%= render @tweet %>
   </ul>
+
+  <h2>Comments</h2>
+  <ul class="tweets-list"> <!-- Use the same class for styling -->
+    <% @comments.each do |comment| %>
+      <li class="tweet mb-3"> <!-- Add the tweet class -->
+        <div class="tweet-header">
+          <div class="tweet-header-content">
+            <div class="avatar">
+              <%= image_tag "https://avatars.githubusercontent.com/u/100782377?s=400&u=8846f6a4dcd5d5a2ddd379ba148683f2122b08e6&v=4", class: "avatar" %>
+            </div>
+            <div class="user-info">
+              <strong class="username"><%= comment.user.name %></strong>
+              <span class="tweet-username">@<%= comment.user.username %></span>
+            </div>
+          </div>
+          <span class="tweet-time text-muted small"><%= time_ago_in_words(comment.created_at) %> ago</span>
+        </div>
+        <div class="tweet-content">
+          <p><%= comment.content %></p>
+        </div>
+      </li>
+    <% end %>
+  </ul>
+
+  <%= form_with(model: [@tweet, @comment], local: true) do |form| %>
+    <div class="form-group">
+      <%= form.label :content, "Add a Comment" %>
+      <%= form.text_area :content, rows: 3, class: "form-control" %>
+    </div>
+    <%= form.submit "Submit", class: "btn btn-primary" %>
+  <% end %>
 </div>
