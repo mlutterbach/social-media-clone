@@ -4,19 +4,29 @@
     <div class="profile-banner">
       <%= image_tag "banner.jpg", alt: "Banner Image", class: "banner-image" %>
     </div>
-    <div class="profile-info">
-      <div class="profile-avatar">
-        <%= image_tag "https://avatars.githubusercontent.com/u/100782377?s=400&u=8846f6a4dcd5d5a2ddd379ba148683f2122b08e6&v=4", class: "avatar profile-avatar" %>
+    <div class="profile-info d-flex justify-content-around align-items-center">
+      <div class="d-flex align-items-center">
+        <div class="profile-avatar">
+          <%= image_tag "https://avatars.githubusercontent.com/u/100782377?s=400&u=8846f6a4dcd5d5a2ddd379ba148683f2122b08e6&v=4", class: "avatar profile-avatar" %>
+        </div>
+        <div class="profile-details ml-3"> <!-- Add margin-left for spacing -->
+          <h1 class="profile-name"><%= @user.name %></h1>
+          <p class="profile-username">@<%= @user.username %></p>
+          <p class="profile-bio"><%= @user.description || "This user hasn't added a bio." %></p>
+          <p class="profile-stats">
+            <span><%= @user.tweets.count %> Tweets</span>
+            <span><%= @user.followers_count || 0 %> Followers</span>
+            <span><%= @user.following_count || 0 %> Following</span>
+          </p>
+        </div>
       </div>
-      <div class="profile-details">
-        <h1 class="profile-name"><%= @user.name %></h1>
-        <p class="profile-username">@<%= @user.username %></p>
-        <p class="profile-bio"><%= @user.description || "This user hasn't added a bio." %></p>
-        <p class="profile-stats">
-          <span><%= @user.tweets.count %> Tweets</span>
-          <span><%= @user.followers_count || 0 %> Followers</span>
-          <span><%= @user.following_count || 0 %> Following</span>
-        </p>
+
+      <div class="profile-button">
+        <% if current_user.following?(@user) %>
+          <%= button_to 'Unfollow', unfollow_user_path(@user), method: :delete, class: "btn btn-danger" %>
+        <% else %>
+          <%= button_to 'Follow', follow_user_path(@user), method: :post, class: "btn btn-primary" %>
+        <% end %>
       </div>
     </div>
   </div>
