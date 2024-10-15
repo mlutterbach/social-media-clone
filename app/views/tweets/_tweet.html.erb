@@ -2,7 +2,7 @@
     <div class="tweet-header">
       <div class="tweet-header-content">
         <div class="avatar">
-          <%= image_tag "https://avatars.githubusercontent.com/u/100782377?s=400&u=8846f6a4dcd5d5a2ddd379ba148683f2122b08e6&v=4", class: "avatar" %>
+          <%= image_tag tweet.user.profile_image.attached? ? tweet.user.profile_image : "https://avatars.githubusercontent.com/u/100782377?s=400&u=8846f6a4dcd5d5a2ddd379ba148683f2122b08e6&v=4", class: "avatar" %>
         </div>
         <div class="user-info">
           <%= link_to user_path(tweet.user), class: "tweet-link" do %>

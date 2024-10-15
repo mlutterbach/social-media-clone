@@ -7,7 +7,7 @@
   left: 0;
   overflow-x: hidden;
   margin-left: 100px;
-  padding-top: 20px; // Space from the top
+  padding-top: 20px;
 }
 
 .navbar-logo {
@@ -17,52 +17,52 @@
 }
 
 .navbar-logo-image {
-  width: 40px; // Adjust size as needed
-  margin-right: 8px; // Space between logo and title
+  width: 40px;
+  margin-right: 8px;
 }
 
 .navbar-title {
-  font-size: 20px; // Adjust font size for the title
-  font-weight: bold; // Make it bold
-  color: #14171a; // Match Twitter's theme
+  font-size: 20px;
+  font-weight: bold;
+  color: #14171a;
 }
 
 .navbar-list-button-ul {
   display: flex;
-  flex-direction: column; // Stack items vertically
-  gap: 30px; // Space between items
+  flex-direction: column;
+  gap: 30px;
 }
 
 .navbar-list-button {
   text-decoration: none;
   color: white;
-  background-color: gray; // Specific color scheme for navbar buttons
-  padding: 8px 10px; // Consistent padding
+  background-color: gray;
+  padding: 8px 10px;
   text-align: center;
   border-radius: 16px;
-  transition: background-color 0.3s; // Smooth transition for hover
+  transition: background-color 0.3s;
 }
 
 .navbar-list-button:hover {
-  background-color: rgb(184, 182, 182); // Hover effect for navbar button
+  background-color: rgb(184, 182, 182);
 }
 
 .navbar-list-user-profile {
   display: flex;
-  align-items: center; // Align avatar and text
+  align-items: center;
   font-size: 11px;
 }
 
 .navbar-list-user-profile:hover {
-  background-color: #f0f0f0; // Change background on hover for distinction
+  background-color: #f0f0f0;
 }
 
-.navbar-list-user-profile .avatar {
-  width: 32px; // Adjust avatar size
-  height: 32px; // Ensure consistency
-  border-radius: 50%; // Circular avatar
+.navbar-list-user-profile-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
 }
 
 .navbar-list-user-profile div {
-  margin-left: 5px; // Space between user name and username
+  margin-left: 5px;
 }
