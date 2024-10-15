@@ -7,7 +7,7 @@
     <div class="profile-info d-flex justify-content-around align-items-center">
       <div class="d-flex align-items-center">
         <div class="profile-avatar">
-          <%= image_tag "https://avatars.githubusercontent.com/u/100782377?s=400&u=8846f6a4dcd5d5a2ddd379ba148683f2122b08e6&v=4", class: "avatar profile-avatar" %>
+          <%= image_tag @user.profile_image.attached? ? @user.profile_image : "https://avatars.githubusercontent.com/u/100782377?s=400&u=8846f6a4dcd5d5a2ddd379ba148683f2122b08e6&v=4", class: "avatar profile-avatar" %>
         </div>
         <div class="profile-details ml-3"> <!-- Add margin-left for spacing -->
           <h1 class="profile-name"><%= @user.name %></h1>
@@ -28,6 +28,11 @@
           <%= button_to 'Follow', follow_user_path(@user), method: :post, class: "btn btn-primary" %>
         <% end %>
       </div>
+        <% if current_user === @user %>
+          <div class="profile-button">
+            <%= link_to "Edit Profile", edit_user_registration_path(current_user), class:"btn btn-primary" %>
+          </div>
+        <% end %>
     </div>
   </div>
 

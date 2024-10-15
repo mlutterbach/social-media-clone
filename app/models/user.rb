@@ -4,6 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  has_one_attached :profile_image
   has_many :tweets
   has_many :likes, dependent: :destroy
   has_many :liked_tweets, through: :likes, source: :tweet
@@ -17,7 +18,7 @@ class User < ApplicationRecord
   validates_presence_of :description, :name
   validates :username, presence: true, uniqueness: true
   validates :email, presence: true, uniqueness: true
-  validates :password, presence: true, length: { minimum: 6 }
+  validates :password, presence: true, length: { minimum: 6 }, if: :password_required?
 
   def following?(user)
     followed_users.include?(user)
@@ -37,5 +38,12 @@ class User < ApplicationRecord
       decrement!(:following_count)
       user.decrement!(:followers_count)
     end
+  end
+
+  private
+
+  def password_required?
+    # Password is required if creating a new user or if the password is being changed
+    new_record? || password.present?
   end
 end
