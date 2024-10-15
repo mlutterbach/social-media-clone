@@ -14,8 +14,6 @@ RSpec.describe Tweet, type: :model do
       content: "First tweet of the project!",
       retweet_count: 5,
       likes_count: 5,
-      reply_privacy: false,
-      location: "Madrid, Spain",
       user: name_user,
     }
   end

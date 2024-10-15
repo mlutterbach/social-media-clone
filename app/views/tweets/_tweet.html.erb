@@ -1,4 +1,38 @@
 <li class="tweet mb-3">
+  <% if tweet.retweet_id.present? %>
+    <div class="retweet-info">
+      <i class="fa-solid fa-retweet"></i> Retweeted by <strong><%= tweet.user.name %></strong>
+    </div>
+
+    <% original_tweet = Tweet.find_by(id: tweet.retweet_id) %>
+    <% if original_tweet %>
+      <div class="original-tweet">
+        <div class="tweet-header">
+          <div class="tweet-header-content">
+            <div class="avatar">
+              <%= image_tag original_tweet.user.profile_image.attached? ? original_tweet.user.profile_image : "https://avatars.githubusercontent.com/u/100782377?s=400&u=8846f6a4dcd5d5a2ddd379ba148683f2122b08e6&v=4", class: "avatar" %>
+            </div>
+            <div class="user-info">
+              <%= link_to original_tweet.user, class: "tweet-link" do %>
+                <strong class="username"><%= original_tweet.user.name %></strong>
+              <% end %>
+              <span class="tweet-username">@<%= original_tweet.user.username %></span>
+            </div>
+          </div>
+          <span class="tweet-time text-muted small"><%= time_ago_in_words(original_tweet.created_at) %> ago</span>
+        </div>
+
+        <div class="tweet-content">
+          <p><%= original_tweet.content || "No content available" %></p>
+        </div>
+      </div>
+    <% else %>
+      <div class="tweet-content">
+        <p>This tweet has been deleted.</p>
+      </div>
+    <% end %>
+
+  <% else %>
     <div class="tweet-header">
       <div class="tweet-header-content">
         <div class="avatar">
@@ -13,38 +47,41 @@
       </div>
       <span class="tweet-time text-muted small"><%= time_ago_in_words(tweet.created_at) %> ago</span>
     </div>
-      <%= link_to tweet_path(tweet), class: "tweet-link" do %>
-        <div class="tweet-content">
-          <p><%= tweet.content || "No content available" %></p>
-        </div>
-      <% end %>
+
+    <%= link_to tweet_path(tweet), class: "tweet-link" do %>
+      <div class="tweet-content">
+        <p><%= tweet.content || "No content available" %></p>
+      </div>
+    <% end %>
 
     <div class="tweet-footer">
-    <% if current_user && current_user.liked_tweets.include?(tweet) %>
-      <% like = current_user.likes.find_by(tweet: tweet) %>
-      <%= button_to tweet_like_path(tweet, like), method: :delete do %>
+      <% if current_user && current_user.liked_tweets.include?(tweet) %>
+        <% like = current_user.likes.find_by(tweet: tweet) %>
+        <%= button_to tweet_like_path(tweet, like), method: :delete do %>
           <i class="fa-solid fa-heart" style="color: #ed0707; padding:2px;"></i><%= tweet.likes_count %>
-      <% end %>
-
-    <% else %>
-      <%= button_to tweet_likes_path(tweet), method: :post do %>
+        <% end %>
+      <% else %>
+        <%= button_to tweet_likes_path(tweet), method: :post do %>
           <i class="fa-solid fa-heart"></i> <%= tweet.likes_count %>
+        <% end %>
       <% end %>
-    <% end %>
 
-    <span class="ml-2"><i class="fa-solid fa-retweet"></i> <%= tweet.retweet_count %></span>
-
-    <% if current_user && current_user.tweets.include?(tweet) %>
-      <%= button_to tweet_path(tweet), method: :delete, data: { confirm: "Are you sure?" } do %>
-        <i class="fa-solid fa-trash-can"></i>
+      <%= button_to retweet_tweet_path(tweet), method: :post do %>
+        <i class="fa-solid fa-retweet"></i> <%= tweet.retweet_count %>
       <% end %>
-    <% end %>
 
-    <!-- Comment Icon -->
-    <span class="comment-icon">
-      <%= link_to tweet_path(tweet) do %>
-        <i class="fa-solid fa-comment" style="padding:2px;"></i><%= tweet.comments.count %>
+      <% if current_user && current_user.tweets.include?(tweet) %>
+        <%= button_to tweet_path(tweet), method: :delete, data: { confirm: "Are you sure?" } do %>
+          <i class="fa-solid fa-trash-can"></i>
+        <% end %>
       <% end %>
-    </span>
-  </div>
+
+      <!-- Comment Icon -->
+      <span class="comment-icon">
+        <%= link_to tweet_path(tweet) do %>
+          <i class="fa-solid fa-comment" style="padding:2px;"></i><%= tweet.comments.count %>
+        <% end %>
+      </span>
+    </div>
+  <% end %>
 </li>

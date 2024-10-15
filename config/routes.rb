@@ -13,6 +13,9 @@ Rails.application.routes.draw do
   resources :tweets, only: [:destroy]
 
   resources :tweets do
+    member do
+      post :retweet
+    end
     resources :likes, only: [:create, :destroy]
     resources :comments, only: [:create, :destroy]
   end

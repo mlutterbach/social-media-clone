@@ -11,3 +11,17 @@
 .tweet-link:hover {
   background-color: #f5f8fa;
 }
+
+.retweet-info {
+  font-size: 0.9em;
+  color: gray;
+  margin-bottom: 5px;
+}
+
+.original-tweet {
+  border-top: 1px solid #e1e1e1;
+  padding-top: 10px;
+  margin-top: 10px;
+  font-style: italic;
+  color: #555;
+}

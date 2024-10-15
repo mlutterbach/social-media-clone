@@ -1,6 +1,6 @@
 class TweetsController < ApplicationController
   skip_before_action :authenticate_user!
-  before_action :set_tweet, only: [:show, :edit, :update, :destroy]
+  before_action :set_tweet, only: [:show, :edit, :update, :destroy, :retweet]
   before_action :authorize_user!, only: [:destroy]
 
   def index
@@ -43,6 +43,16 @@ class TweetsController < ApplicationController
   def destroy
     @tweet.destroy
     redirect_to user_tweets_path(current_user), status: :see_other
+  end
+
+  def retweet
+    retweet = current_user.tweets.new(content: @tweet.content, retweet_id: @tweet.id)
+
+    if retweet.save
+      redirect_to root_path, notice: 'Tweet retweeted successfully.'
+    else
+      redirect_to root_path, alert: 'Failed to retweet.'
+    end
   end
 
   private
