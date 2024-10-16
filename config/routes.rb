@@ -1,14 +1,13 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: 'users/registrations' }
   root to: 'tweets#index'
-  get 'about', to: 'tweets#about'
-  get 'contact', to: 'tweets#contact'
+
   resources :users, only: [:create, :index, :destroy, :show] do
     member do
       post :follow
       delete :unfollow
     end
-    resources :tweets, only: [:index, :new, :create, :edit, :update, :show]
+    resources :tweets, only: [:new, :create, :show]
   end
   resources :tweets, only: [:destroy]
 
