@@ -1,6 +1,6 @@
 class TweetsController < ApplicationController
   skip_before_action :authenticate_user!
-  before_action :set_tweet, only: [:show, :edit, :update, :destroy, :retweet]
+  before_action :set_tweet, only: [:show, :destroy, :retweet]
   before_action :authorize_user!, only: [:destroy]
 
   def index
@@ -29,17 +29,6 @@ class TweetsController < ApplicationController
     end
   end
 
-  def edit
-  end
-
-  def update
-    if @tweet.update(tweet_params)
-      redirect_to tweet_path(@tweet), notice: "Tweet updated successfully."
-    else
-      render :edit
-    end
-  end
-
   def destroy
     @tweet.destroy
     redirect_to user_tweets_path(current_user), status: :see_other
@@ -65,9 +54,9 @@ class TweetsController < ApplicationController
     @tweet = Tweet.find(params[:id])
   end
 
-  def set_user
-    @user = User.find(params[:user_id])
-  end
+  # def set_user
+  #   @user = User.find(params[:user_id])
+  # end
 
   def authorize_user!
     unless @tweet.user == current_user
