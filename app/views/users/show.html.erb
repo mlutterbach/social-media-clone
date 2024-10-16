@@ -35,11 +35,14 @@
         <% end %>
     </div>
   </div>
-
   <div class="profile-tweets">
-    <h2>Tweets</h2>
-    <ul class="tweets-list">
-      <%= render @tweets %>
-    </ul>
+    <h2><%=pluralize(@tweets.count, "Tweet")%> by <%= @user.name %></h2>
+    <% if @tweets.count == 0 %>
+      <h3 class="text-muted px-3 py-3" >Nothing to see here...</h3>
+    <% else %>
+      <ul class="tweets-list">
+        <%= render @tweets %>
+      </ul>
+    <% end %>
   </div>
 </div>

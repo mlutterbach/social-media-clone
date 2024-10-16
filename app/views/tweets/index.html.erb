@@ -1,7 +1,5 @@
 <div class="row justify-content-center">
   <div class="col-12 col-lg-8">
-    <h1>Home</h1>
-
     <% if user_signed_in? %>
       <div class="new-tweet-form mb-4">
         <%= form_with(model: [current_user, Tweet.new], local: true) do |f| %>
@@ -18,7 +16,6 @@
       <p>Please <%= link_to "sign in", new_user_session_path %> to tweet.</p>
     <% end %>
 
-    <h2>Tweets</h2>
     <ul class="list-unstyled tweets-list">
       <% @tweets.order(created_at: :desc).each do |tweet| %>
         <%= render partial: "tweets/tweet", locals: { tweet: tweet } %>
