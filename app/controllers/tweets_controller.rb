@@ -17,11 +17,8 @@ class TweetsController < ApplicationController
   end
 
   def create
-    @user = User.find(params[:user_id])
-    @tweet = @user.tweets.build(tweet_params)
+    @tweet = current_user.tweets.new(tweet_params)
 
-    @tweet.retweet_count = 0
-    @tweet.likes_count = 0
     if @tweet.save
       redirect_to root_path, notice: "Tweet created successfully."
     else
@@ -30,8 +27,10 @@ class TweetsController < ApplicationController
   end
 
   def destroy
+    retweets = Tweet.where(retweet_id: @tweet.id)
+    retweets.destroy_all
     @tweet.destroy
-    redirect_to user_tweets_path(current_user), status: :see_other
+    redirect_to root_path, status: :see_other
   end
 
   def retweet
@@ -47,16 +46,12 @@ class TweetsController < ApplicationController
   private
 
   def tweet_params
-    params.require(:tweet).permit(:content, :reply_privacy, :location)
+    params.require(:tweet).permit(:content)
   end
 
   def set_tweet
     @tweet = Tweet.find(params[:id])
   end
-
-  # def set_user
-  #   @user = User.find(params[:user_id])
-  # end
 
   def authorize_user!
     unless @tweet.user == current_user

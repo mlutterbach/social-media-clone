@@ -6,7 +6,11 @@
     <%= render @tweet %>
   </ul>
 
-  <h2>Comments</h2>
+  <p class="text-muted" style="margin-bottom: 2px;">Replying to
+    <%= link_to @tweet.user do %>
+      <strong style="text-decoration: underline;text-decoration-color: white;"><%= @tweet.user.name %></strong>
+    <% end %>
+  </p>
   <ul class="tweets-list">
     <% @comments.each do |comment| %>
       <li class="tweet mb-3">
@@ -22,17 +26,24 @@
           </div>
           <span class="tweet-time text-muted small"><%= time_ago_in_words(comment.created_at) %> ago</span>
         </div>
-        <div class="tweet-content">
+        <div class="tweet-content", style="justify-content: space-between; display: flex; align-items: center;">
           <p><%= comment.content %></p>
+          <div>
+          <% if current_user == comment.user %>
+            <%= button_to tweet_comment_path(@tweet, comment), method: :delete, data: { confirm: "Are you sure?" } do %>
+              <i class="fa-solid fa-trash-can"></i>
+            <% end %>
+          </div>
         </div>
+      <% end %>
       </li>
     <% end %>
   </ul>
 
   <%= form_with(model: [@tweet, @comment], local: true) do |form| %>
     <div class="form-group">
-      <%= form.label :content, "Add a Comment" %>
-      <%= form.text_area :content, rows: 3, class: "form-control" %>
+      <%= form.label :content, "Tweet your reply" %>
+      <%= form.text_area :content, rows: 3, class: "form-control", placeholder: "Type your reply here..." %>
     </div>
     <%= form.submit "Submit", class: "btn btn-primary" %>
   <% end %>

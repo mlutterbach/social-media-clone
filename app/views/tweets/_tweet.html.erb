@@ -70,18 +70,17 @@
         <i class="fa-solid fa-retweet"></i> <%= tweet.retweet_count %>
       <% end %>
 
-      <% if current_user && current_user.tweets.include?(tweet) %>
-        <%= button_to tweet_path(tweet), method: :delete, data: { confirm: "Are you sure?" } do %>
-          <i class="fa-solid fa-trash-can"></i>
-        <% end %>
-      <% end %>
-
-      <!-- Comment Icon -->
       <span class="comment-icon">
         <%= link_to tweet_path(tweet) do %>
           <i class="fa-solid fa-comment" style="padding:2px;"></i><%= tweet.comments.count %>
         <% end %>
       </span>
+
+      <% if current_user && current_user.tweets.include?(tweet) %>
+      <%= button_to tweet_path(tweet), method: :delete, data: { confirm: "Are you sure?" } do %>
+        <i class="fa-solid fa-trash-can"></i>
+      <% end %>
+    <% end %>
     </div>
   <% end %>
 </li>
