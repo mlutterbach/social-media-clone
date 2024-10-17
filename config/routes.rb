@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: 'users/registrations' }
   root to: 'tweets#index'
+  get 'about', to: 'pages#about'
 
   resources :users, only: [:create, :index, :destroy, :show] do
     member do
