@@ -14,6 +14,11 @@ RSpec.describe User, type: :model do
     expect(subject).to be_valid
   end
 
+  it "is valid, with followers_count = 0, following_count = 0" do
+    expect(subject.followers_count).to eq(0)
+    expect(subject.following_count).to eq(0)
+  end
+
   it "is not valid without a username" do
     subject.username = nil
     expect(subject).to_not be_valid

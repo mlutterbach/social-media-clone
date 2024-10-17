@@ -21,6 +21,7 @@ RSpec.describe UsersController, type: :controller do
   end
 
   let(:user) { User.create!(valid_attributes) }
+  let(:another_user) { User.create!(username: "AnotherUser", password: "secret", name: "Another Name", description: "Some person", email:"aperson@email.com") }
   let!(:tweet1) { user.tweets.create!(content: "First tweet") }
   let!(:tweet2) { user.tweets.create!(content: "Second tweet") }
 
@@ -73,6 +74,63 @@ RSpec.describe UsersController, type: :controller do
     context "when user is not authenticated" do
       it "redirects to the login page" do
         get :show, params: { id: user.id }
+        expect(response).to redirect_to(new_user_session_path)
+      end
+    end
+  end
+
+  describe "POST #follow" do
+    context "when user is authenticated" do
+      before { sign_in user }
+
+      it "user follows another user" do
+        expect {
+          post :follow, params: { id: another_user.id }
+        }.to change { user.followed_users.count }.by(1)
+
+        another_user.reload
+        expect(another_user.followers_count).to eq(1)
+        expect(response).to redirect_to(user_path(another_user))
+        expect(flash[:notice]).to eq("You are now following #{another_user.name}.")
+      end
+
+      it "does not allow following the same user twice" do
+        user.follow(another_user)
+        expect {
+          post :follow, params: { id: another_user.id }
+        }.not_to change { user.followed_users.count }
+      end
+    end
+  end
+
+  describe "DELETE #unfollow" do
+    context "when user is authenticated" do
+      before { sign_in user }
+
+      it "user unfollows another user" do
+        user.follow(another_user)
+
+        expect {
+          delete :unfollow, params: { id: another_user.id }
+        }.to change { user.followed_users.count }.by(-1)
+
+        another_user.reload
+        expect(another_user.followers_count).to eq(0)
+        expect(response).to redirect_to(user_path(another_user))
+        expect(flash[:notice]).to eq("You have unfollowed #{another_user.name}.")
+      end
+
+      it "does not allow unfollowing a user that is not followed" do
+        # user is not following another_user
+        expect {
+          delete :unfollow, params: { id: another_user.id }
+        }.not_to change { user.followed_users.count }
+      end
+    end
+
+    context "when user is not authenticated" do
+      it "redirects to the login page" do
+        delete :unfollow, params: { id: another_user.id }
         expect(response).to redirect_to(new_user_session_path)
       end
     end
