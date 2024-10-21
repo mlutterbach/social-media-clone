@@ -14,7 +14,6 @@
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "babel-loader": "^8.4.1",
     "webpack-cli": "^4.10.0",
-    "webpack-dev-server": "^4.15.2",
-    "yarn": "^1.22.22"
+    "webpack-dev-server": "^4.15.2"
   }
 }
