@@ -39,3 +39,6 @@ yarn-debug.log*
 /storage/*
 /public/uploads/*
 coverage
+
+/app/assets/builds/*
+!/app/assets/builds/.keep
