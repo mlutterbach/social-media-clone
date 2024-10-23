@@ -1,12 +1,12 @@
 databases:
-  - name: social-media-clone
-    databaseName: social-media-clone
-    user: social-media-clone
+  - name: social_media_clone
+    databaseName: social_media_clone
+    user: social_media_clone
     plan: free
 
 services:
   - type: web
-    name: social-media-clone
+    name: social_media_clone
     runtime: ruby
     plan: free
     buildCommand: "./bin/render-build.sh"
@@ -15,7 +15,7 @@ services:
     envVars:
       - key: DATABASE_URL
         fromDatabase:
-          name: social-media-clone
+          name: social_media_clone
           property: connectionString
       - key: RAILS_MASTER_KEY
         sync: false
