@@ -6,7 +6,7 @@ databases:
 
 services:
   - type: web
-    name: social_media_clone
+    name: "social-media-clone"
     runtime: ruby
     plan: free
     buildCommand: "./bin/render-build.sh"
