@@ -10,7 +10,7 @@ module.exports = {
   mode,
   entry: {
     application: [
-      './app/assets/javascripts/application.js',
+      './app/javascript/application.js',
       './app/assets/stylesheets/application.scss',
     ],
     custom: './app/assets/stylesheets/custom.scss',
