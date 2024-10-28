@@ -19,6 +19,7 @@ class User < ApplicationRecord
   validates :username, presence: true, uniqueness: true
   validates :email, presence: true, uniqueness: true
   validates :password, presence: true, length: { minimum: 6 }, if: :password_required?
+  validate :correct_profile_image_mime_type, on: :update
 
   def following?(user)
     followed_users.include?(user)
@@ -45,5 +46,17 @@ class User < ApplicationRecord
   def password_required?
     # Password is required if creating a new user or if the password is being changed
     new_record? || password.present?
+  end
+
+  def correct_profile_image_mime_type
+    if profile_image.attached?
+      unless profile_image.content_type.in?(%('image/png image/jpg image/jpeg'))
+        errors.add(:profile_image, 'must be a PNG or JPEG image')
+      end
+
+      if profile_image.byte_size > 5.megabytes
+        errors.add(:profile_image, 'size must be less than 5MB')
+      end
+    end
   end
 end

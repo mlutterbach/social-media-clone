@@ -9,10 +9,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def update_resource(resource, params)
-    # If no new profile_image is being uploaded, exclude it from the params
-    if params[:profile_image].blank?
-      params.delete(:profile_image)
+    Rails.logger.debug "Received Params: #{params.inspect}"
+    if params[:profile_image].present?
+      Rails.logger.debug "Attaching profile image"
+      resource.profile_image.attach(params[:profile_image])
     end
+
     # Check if a new password is being provided
     if params[:password].present?
       # If password is provided, current password must be included
@@ -25,6 +27,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
       params.delete(:password)
       params.delete(:password_confirmation)
       params.delete(:current_password) if params[:current_password].blank?
+    end
+
+    unless resource.save
+      logger.error(resource.errors.full_messages)
+      return false
     end
 
     # Call super to update the resource

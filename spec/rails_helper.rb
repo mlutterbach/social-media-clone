@@ -37,6 +37,7 @@ RSpec.configure do |config|
 
   config.before(:each) do
     DatabaseCleaner.start # Start cleaning before each test
+    Rails.logger.level = Logger::DEBUG
   end
 
   config.after(:each) do

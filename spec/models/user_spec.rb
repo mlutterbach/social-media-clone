@@ -48,6 +48,46 @@ RSpec.describe User, type: :model do
     expect(user).to respond_to(:tweets)
     expect(user.tweets.count).to eq(0)
   end
+
+  describe "profile image attachment" do
+    before { subject.save }
+
+    it "is valid without a profile_image" do
+      expect(subject.update(profile_image: nil)).to be_truthy
+    end
+
+    it "is valid with a valid profile_image" do
+      file = fixture_file_upload(Rails.root.join('spec', 'fixtures', 'files', 'valid_image.jpg'), 'image/jpg')
+      expect(subject.update(profile_image: file)).to be_truthy
+      expect(subject.profile_image).to be_attached
+    end
+
+    it "is not valid with an invalid profile_image type" do
+      file = fixture_file_upload(Rails.root.join('spec', 'fixtures', 'files', 'invalid_image.txt'), 'text/plain')
+      expect(subject.update(profile_image: file)).to be_falsey
+      expect(subject.errors[:profile_image]).to include("must be a PNG or JPEG image")
+    end
+
+    it "is not valid with a profile_image size greater than 5MB" do
+      # Create a temporary file that simulates being larger than 5MB
+      large_file = Tempfile.new(['large_image', '.jpg'])
+      large_file.write('0' * (6 * 1024 * 1024))  # Write 6MB of data
+      large_file.rewind
+
+      # Use the Tempfile for the test
+      file_to_attach = ActionDispatch::Http::UploadedFile.new(
+        tempfile: large_file,
+        filename: 'large_image.jpg',
+        content_type: 'image/jpg'
+      )
+
+      expect(subject.update(profile_image: file_to_attach)).to be_falsey
+      expect(subject.errors[:profile_image]).to include("size must be less than 5MB")
+
+      large_file.close
+      large_file.unlink  # Delete the temporary file
+    end
+  end
 end
 
 RSpec.describe User, type: :model do
